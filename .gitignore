@@ -11,3 +11,5 @@
 /fish/conf.d/
 
 .SRCINFO
+
+.worktrees/
