@@ -1,3 +1,28 @@
+local function zoom(offset)
+    local MAX_ZOOM = 3
+    local MIN_ZOOM = 1
+    local ZOOM_TOGGLE_FACTOR = 1.75
+    local current = hl.get_config("cursor.zoom_factor")
+    if offset ~= nil then
+        current = current + offset
+    elseif current ~= MIN_ZOOM then
+        current = MIN_ZOOM
+    else
+        current = ZOOM_TOGGLE_FACTOR
+    end
+    current = math.max(MIN_ZOOM, math.min(MAX_ZOOM, current))
+    hl.config({ cursor = { zoom_factor = current } })
+end
+
+local function zoom_step(offset)
+    local MAX_ZOOM = 5
+    local MIN_ZOOM = 1
+    local current = hl.get_config("cursor.zoom_factor")
+    current = current + offset
+    current = math.max(MIN_ZOOM, math.min(MAX_ZOOM, current))
+    hl.config({ cursor = { zoom_factor = current } })
+end
+
 local function wsaction(action, range, i)
     return function()
         local activews = hl.get_active_workspace()
@@ -279,6 +304,8 @@ local function toggle(special_workspace)
 end
 
 return {
+    zoom                 = zoom,
+    zoom_step            = zoom_step,
     resizer              = resizer,
     resize_by_screen     = resize_by_screen,
     resize_active_window = resize_active_window,

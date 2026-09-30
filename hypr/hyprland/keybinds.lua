@@ -50,34 +50,32 @@ local function extend_keybind(base, suffix)
 end
 
 -- Launcher
-local launcher_default = normalise_keybind("SUPER + SUPER_L")
-create_bind(
-    vars.kbLauncher,
-    hl.dsp.global("caelestia:launcher"),
-    function(key)
-        return normalise_keybind(key) == launcher_default and release or nil
-    end
-)
+hl.bind("SUPER + A", hl.dsp.global("caelestia:launcher"))
 
 -- Misc
-create_bind(vars.kbSession, hl.dsp.global("caelestia:session"))
-create_bind(vars.kbShowSidebar, hl.dsp.global("caelestia:sidebar"))
-create_bind(vars.kbClearNotifs, hl.dsp.global("caelestia:clearNotifs"), locked)
-create_bind(vars.kbShowPanels, hl.dsp.global("caelestia:showall"))
-create_bind(vars.kbLock, hl.dsp.global("caelestia:lock"))
-
+hl.bind(vars.kbSession, hl.dsp.global("caelestia:session"))
+hl.bind(vars.kbShowSidebar, hl.dsp.global("caelestia:sidebar"))
+hl.bind(vars.kbClearNotifs, hl.dsp.global("caelestia:clearNotifs"), { locked = true })
+hl.bind(vars.kbShowPanels, hl.dsp.global("caelestia:showall"))
+hl.bind(vars.kbLock, hl.dsp.global("caelestia:lock"))
+hl.bind("SUPER + grave", fn.zoom)
+hl.bind("SUPER + SHIFT + mouse_up", function() fn.zoom_step(0.25) end)
+hl.bind("SUPER + SHIFT + mouse_down", function() fn.zoom_step(-0.25) end)
+hl.bind("SUPER + SHIFT + T", hl.dsp.exec_cmd('grim -g "$(slurp)" - | tesseract - - -l eng+vie | wl-copy'))
+hl.bind("SUPER + SHIFT + D", hl.dsp.exec_cmd('/home/billarch/.local/bin/quick-redeem.sh'))
+hl.bind("SUPER + CTRL + SHIFT + D", hl.dsp.exec_cmd('/home/billarch/.local/bin/quick-redeem.sh -c'))
 -- Restore lock
-create_bind(vars.kbRestoreLock, function()
-    hl.dispatch(hl.dsp.exec_cmd("caelestia shell -d"))
+hl.bind(vars.kbRestoreLock, function()
+    hl.dispatch(hl.dsp.exec_cmd("qs -p ~/.config/quickshell/caelestia/shell.qml -n -d"))
     hl.dispatch(hl.dsp.global("caelestia:lock"))
 end)
 
 -- Kill/restart
-create_bind("CTRL + SUPER + SHIFT + R", hl.dsp.exec_cmd("qs -c caelestia kill"), release)
-create_bind(
+hl.bind("CTRL + SUPER + SHIFT + R", hl.dsp.exec_cmd("qs -p ~/.config/quickshell/caelestia/shell.qml kill"), { release = true })
+hl.bind(
     "CTRL + SUPER + ALT + R",
-    hl.dsp.exec_cmd("qs -c caelestia kill; sleep .1; caelestia shell -d"),
-    release
+    hl.dsp.exec_cmd("qs -p ~/.config/quickshell/caelestia/shell.qml kill; sleep .1; qs -p ~/.config/quickshell/caelestia/shell.qml -n -d"),
+    { release = true }
 )
 
 for i = 1, 10 do
@@ -181,6 +179,13 @@ create_bind({ vars.kbMediaToggle, "XF86AudioPlay", "XF86AudioPause" }, hl.dsp.gl
 create_bind({ vars.kbMediaNext, "XF86AudioNext" }, hl.dsp.global("caelestia:mediaNext"), locked)
 create_bind({ vars.kbMediaPrev, "XF86AudioPrev" }, hl.dsp.global("caelestia:mediaPrev"), locked)
 create_bind({ vars.kbMediaStop, "XF86AudioStop" }, hl.dsp.global("caelestia:mediaStop"), locked)
+hl.bind("Print", hl.dsp.exec_cmd("caelestia screenshot"), { locked = true })
+hl.bind("SUPER + SHIFT + S", hl.dsp.global("caelestia:screenshotFreeze"))
+hl.bind("SUPER + SHIFT + ALT + S", hl.dsp.global("caelestia:screenshotClip"))
+hl.bind("SUPER + ALT + R", hl.dsp.exec_cmd("caelestia record -s"))
+hl.bind("CTRL + ALT + R", hl.dsp.exec_cmd("caelestia record"))
+hl.bind("SUPER + SHIFT + ALT + R", hl.dsp.exec_cmd("caelestia record -r"))
+hl.bind("SUPER + SHIFT + C", hl.dsp.exec_cmd("hyprpicker -a"))
 
 -- Volume
 create_bind({ vars.kbVolumeMute, "XF86AudioMute" }, hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), locked)
@@ -223,3 +228,17 @@ create_bind(
         " -a 'Shell' -A 'Test1=I got it!' -A 'Test2=Another action'"
     )
 )
+
+-- Gamemode
+hl.define_submap("gamemode", function()
+    hl.bind("SUPER + DELETE", hl.dsp.submap("reset"))
+end)
+hl.bind("SUPER + DELETE", hl.dsp.submap("gamemode"))
+
+
+-- ALT+TAB opens the overview instead of caelestia's cycle_next.
+-- SHIFT/CTRL + ALT+TAB are still caelestia's.
+hl.unbind("ALT + TAB")
+for _, k in ipairs({ "ALT + TAB", "SUPER + TAB" }) do
+    hl.bind(k, hl.dsp.exec_cmd("qs -c overview ipc call overview toggle"))
+end

@@ -217,3 +217,7 @@ hl.layer_rule({ match = { namespace = "launcher" }, animation = "popin 80%", blu
 -- Shell
 hl.layer_rule({ match = { namespace = "caelestia-(border-exclusion|area-picker)" }, no_anim = true })
 hl.layer_rule({ match = { namespace = "caelestia-(drawers|background)" }, animation = "fade" })
+
+-- Fade in/out + blurred background. ignore_alpha: only blur where the overlay
+-- paints above the threshold (the scrim is 0.28, see Theme.qml).
+hl.layer_rule({ match = { namespace = "qs-overview" }, animation = "fade", blur = true, ignore_alpha = 0.2 })

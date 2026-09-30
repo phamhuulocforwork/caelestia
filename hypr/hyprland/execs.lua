@@ -26,7 +26,8 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("mpris-proxy")
 
     -- Start shell
-    hl.exec_cmd("caelestia shell -d")
+    hl.exec_cmd('env QT_QPA_PLATFORMTHEME=gtk3 qs -p "$HOME/.config/quickshell/caelestia/shell.qml" -n -d')
+    hl.exec_cmd("env QT_QPA_PLATFORMTHEME=gtk3 qs -c overview -n -d")
 end)
 
 -- Resizer listeners

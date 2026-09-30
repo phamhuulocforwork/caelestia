@@ -6,11 +6,11 @@ return {
     ------------------
 
     -- Apps
-    terminal                   = "foot",
-    browser                    = "firefox",
-    editor                     = "codium",
-    fileExplorer               = "thunar",
-    audioSettings              = "pwvucontrol",
+    terminal                   = "kitty",
+    browser                    = "helium-browser",
+    editor                     = "zed",
+    fileExplorer               = "nemo",
+    audioSettings              = "pavucontrol",
 
     -- Touchpad
     touchpadDisableTyping      = true,
@@ -38,20 +38,19 @@ return {
     workspaceGaps              = 20,
     windowGapsIn               = 5,
     windowGapsOut              = 10,
-    singleWindowGapsOut        = 20,
+    singleWindowGapsOut        = 10,
 
     -- Window styling
-    windowOpacity              = 0.95,
-    windowRounding             = 15,
-    windowRoundingPower        = 2,
-    windowBorderSize           = 1,
+    windowOpacity              = 0.97,
+    windowRounding             = 16,
+    windowBorderSize           = 2,
     activeWindowBorderColour   = "rgba(" .. scheme.primary .. "e6)",
     inactiveWindowBorderColour = "rgba(" .. scheme.onSurfaceVariant .. "11)",
 
     -- Misc
     volumeStep                 = 10,
     volumeMax                  = 100,
-    cursorTheme                = "sweet-cursors",
+    cursorTheme                = "Bibata-Modern-Classic",
     cursorSize                 = 24,
     sleepGestureCmd            = "systemctl suspend-then-hibernate",
 
@@ -59,7 +58,7 @@ return {
     ---- KEYBINDS ----
     ------------------
 
-    -- Modifier only, the actual binds will be mod + 0-9. These should be strings and not arrays.
+    -- Workspaces
     kbGoToWs                   = "SUPER",
     kbGoToWsGroup              = "CTRL + SUPER",
     kbMoveWinToWs              = "SUPER + ALT",
@@ -111,8 +110,8 @@ return {
     kbTodoWs                   = "SUPER + R",
 
     -- Apps
-    kbTerminal                 = "SUPER + T",
-    kbBrowser                  = "SUPER + W",
+    kbTerminal                 = "SUPER + RETURN",
+    kbBrowser                  = "SUPER + SHIFT + F",
     kbEditor                   = "SUPER + C",
     kbFileExplorer             = "SUPER + E",
     kbAudioSettings            = "CTRL + ALT + V",
