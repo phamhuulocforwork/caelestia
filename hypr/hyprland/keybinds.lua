@@ -143,42 +143,6 @@ create_bind(vars.kbWindowPip, function()
         end
     end
 end)
-<<<<<<< HEAD
-hl.bind(vars.kbPinWindow, hl.dsp.window.pin())
-hl.bind(vars.kbWindowFullscreen, hl.dsp.window.fullscreen({ mode = "fullscreen" }))
-hl.bind(vars.kbWindowBorderedFullscreen, hl.dsp.window.fullscreen({ mode = "maximized" }))
-hl.bind(vars.kbToggleWindowFloating, hl.dsp.window.float())
-hl.bind(vars.kbCloseWindow, hl.dsp.window.close())
-
--- Special workspace toggles
-hl.bind(vars.kbSpecialWs, hl.dsp.exec_cmd("caelestia toggle specialws"))
-hl.bind(vars.kbSystemMonitorWs, hl.dsp.exec_cmd("caelestia toggle sysmon"))
-hl.bind(vars.kbMusicWs, hl.dsp.exec_cmd("caelestia toggle music"))
-hl.bind(vars.kbCommunicationWs, hl.dsp.exec_cmd("caelestia toggle communication"))
-hl.bind(vars.kbTodoWs, hl.dsp.exec_cmd("caelestia toggle todo"))
-
--- Apps
-hl.bind(vars.kbTerminal, hl.dsp.exec_cmd(vars.terminal))
-hl.bind(vars.kbBrowser, hl.dsp.exec_cmd(vars.browser))
-hl.bind(vars.kbEditor, hl.dsp.exec_cmd(vars.editor))
-hl.bind(vars.kbFileExplorer, hl.dsp.exec_cmd(vars.fileExplorer))
-hl.bind("CTRL + ALT + V", hl.dsp.exec_cmd(vars.audioSettings))
-
--- Utilities
-hl.bind("Print", hl.dsp.exec_cmd("caelestia screenshot"), { locked = true })
-hl.bind("SUPER + SHIFT + S", hl.dsp.global("caelestia:screenshotFreeze"))
-hl.bind("SUPER + SHIFT + ALT + S", hl.dsp.global("caelestia:screenshot"))
-hl.bind("SUPER + ALT + R", hl.dsp.exec_cmd("caelestia record -s"))
-hl.bind("CTRL + ALT + R", hl.dsp.exec_cmd("caelestia record"))
-hl.bind("SUPER + SHIFT + ALT + R", hl.dsp.exec_cmd("caelestia record -r"))
-hl.bind("SUPER + SHIFT + C", hl.dsp.exec_cmd("hyprpicker -a"))
-
--- Volume
-hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true })
-hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true })
-hl.bind("SUPER + SHIFT + M", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true })
-hl.bind(
-=======
 create_bind(vars.kbPinWindow, hl.dsp.window.pin())
 create_bind(vars.kbWindowFullscreen, hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 create_bind(vars.kbWindowBorderedFullscreen, hl.dsp.window.fullscreen({ mode = "maximized" }))
@@ -222,7 +186,6 @@ create_bind({ vars.kbMediaStop, "XF86AudioStop" }, hl.dsp.global("caelestia:medi
 create_bind({ vars.kbVolumeMute, "XF86AudioMute" }, hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), locked)
 create_bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), locked)
 create_bind(
->>>>>>> upstream/main
     "XF86AudioRaiseVolume",
     hl.dsp.exec_cmd(
         "wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; wpctl set-volume -l " ..
